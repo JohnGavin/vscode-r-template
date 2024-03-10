@@ -4,7 +4,8 @@ source(file.path(
   Sys.getenv(
     if (.Platform$OS.type == "windows") "USERPROFILE" else "HOME"
   ),
-  ".vscode-R", "init.R"
+  "/root/.vscode-server/extensions/reditorsupport.r-2.8.2/R/session/init.R"
+  # ".vscode-R", "init.R"
 ))
 
 # Source: https://github.com/REditorSupport/vscode-R/wiki/Plot-viewer#svg-in-httpgd-webpage
