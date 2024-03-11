@@ -1,0 +1,9 @@
+NAME=NixOS
+VERSION="23.11 (Tapir)"
+ID=nixos
+ID_LIKE=nixos
+VERSION_ID=23.11
+PRETTY_NAME="NixOS 23.11 (Tapir)"
+HOME_URL="https://nixos.org/"
+SUPPORT_URL="https://nixos.org/support.html"
+BUG_REPORT_URL="https://github.com/NixOS/nixpkgs/issues"

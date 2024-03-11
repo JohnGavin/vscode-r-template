@@ -1,9 +1,8 @@
-FROM ubuntu:22.04
+# FROM ubuntu:22.04
 # image 'mcr.microsoft.com/devcontainers/base:alpine' locally
 
 FROM nixos/nix
 
-# cat /etc/os-release || cat /usr/lib/os-release
 
 RUN nix-channel --update
 
@@ -11,6 +10,8 @@ RUN nix-channel --update
 # message: 'Command in container failed: (cat /etc/os-release || cat /usr/lib/os-release) 2>/dev/null'
 # https://github.com/NixOS/nixpkgs/issues/174633
 RUN touch /etc/os-release
+COPY _etc_os-release /etc/os-release
+# cat /etc/os-release || cat /usr/lib/os-release
 
 # RUN nix-build -A pythonFull '<nixpkgs>'
 # RUN nix-build -A python3 FAILS!
