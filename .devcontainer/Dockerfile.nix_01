@@ -2,5 +2,7 @@
 FROM nixos/nix
 RUN nix-channel --update
 # RUN nix-build -A pythonFull '<nixpkgs>'
-RUN nix-build -A R python3 radianWrapper rPackages.ggplot2 rPackages.pacman rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
+# RUN nix-build -A python3 FAILS!
+RUN nix-build R radianWrapper
+RUN nix-build rPackages.ggplot2 rPackages.pacman rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
 
