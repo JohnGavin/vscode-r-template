@@ -16,7 +16,8 @@ FROM nixpkgs/devcontainer
 # RUN nix-build -A pythonFull '<nixpkgs>'
 # RUN nix-build -A python3 FAILS!
 COPY .Rprofile /
-COPY shell.nix /
+COPY default.nix /
+# COPY shell.nix /
 RUN nix-build /default.nix
 # RUN nix-build /shell.nix
 # RUN nix-build -p rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
