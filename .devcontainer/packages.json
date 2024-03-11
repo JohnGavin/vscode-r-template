@@ -1,6 +1,10 @@
 {
     "packages": [
         {
+            "package": "jsonlite",
+            "version": "1.8.8"
+        },
+        {
             "package": "BH",
             "version": "1.81.0-1"
         },
