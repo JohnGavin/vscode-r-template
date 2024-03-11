@@ -1,7 +1,13 @@
-# FROM ubuntu:22.04
+# FROM ubuntu:22.04 AS UBUNTU
 # image 'mcr.microsoft.com/devcontainers/base:alpine' locally
-FROM nixos/nix
+
+FROM nixos/nix AS NIXOS
+
+# cat /etc/os-release || cat /usr/lib/os-release
+
 RUN nix-channel --update
+
+RUN touch /etc/os-release
 
 # RUN nix-build -A pythonFull '<nixpkgs>'
 # RUN nix-build -A python3 FAILS!
