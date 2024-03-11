@@ -9,7 +9,7 @@ pkgs.mkShell {
     R
     python3 # radian
     radianWrapper
-    locales
+    # locales
 
     #rPackages.ggplot2
     # rPackages.dplyr rPackages.pacman
