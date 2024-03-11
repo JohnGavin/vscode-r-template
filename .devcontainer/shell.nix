@@ -7,7 +7,8 @@ pkgs.mkShell {
     #rnix-lsp
 
     R
-    #radianWrapper
+    python3 # radian
+    radianWrapper
     #rPackages.ggplot2
     # rPackages.dplyr rPackages.pacman
 #    python3

@@ -12,51 +12,6 @@ RUN nix-build /shell.nix
 
 
 
-# Step 3 - Install R dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    apt-utils\
-    gfortran \
-    git \
-    g++ \
-    libreadline-dev \
-    libx11-dev \
-    libxt-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libcairo2-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libxml2-dev \
-    libudunits2-dev \
-    libgdal-dev \
-    libbz2-dev \
-    libzstd-dev \
-    liblzma-dev \
-    libpcre2-dev \
-    locales \
-    openjdk-8-jdk \
-    screen \
-    texinfo \
-    texlive \
-    texlive-fonts-extra \
-    vim \
-    wget \
-    xvfb \
-    tzdata \
-    sudo\
-    jq\
-    curl\
-    libgit2-dev \
-    libmagick++-dev \
-    make \
-    tmux \
-    python3-launchpadlib \
-    python3.10-dev \
-    python3.10-venv \
-    python3-pip \
-    lsof \
-    && rm -rf /var/lib/apt/lists/*
-
 RUN locale-gen en_US.UTF-8
 
 WORKDIR ~/
@@ -66,7 +21,7 @@ COPY packages.json install_packages.R requirements.txt install_quarto.sh ./setti
 RUN Rscript ./settings/install_packages.R
 
 # Installing Quarto
-RUN bash ./settings/install_quarto.sh $QUARTO_VER
+#RUN bash ./settings/install_quarto.sh $QUARTO_VER
 
 
 # Step 5 - Set Python Environment and install radian
