@@ -2,7 +2,10 @@
     "name": "R Dev Environment",
     // "image": "rkrispin/vscode_r_dev:0.1.0",
     "build": {
-        "dockerfile": "Dockerfile.dev",
+        "dockerfile":
+          "Dockerfile.nix_01"
+          //"Dockerfile.dev"
+          ,
         "context": ".",
         "args": {
             "VENV_NAME": "R_ENV",
