@@ -6,7 +6,7 @@
     // "image": "rkrispin/vscode_r_dev:0.1.0",
     "build": {
         "dockerfile":
-          "Dockerfile.nix_01"
+          "Dockerfile_nix_01"
           //"Dockerfile.dev"
           ,
         "context": "."
@@ -26,7 +26,7 @@
   			"settings": {
   				"r.rterm.linux":
   				  // "/usr/local/bin/radian"
-  				  "~/.pyenv/shims/radian"
+  				  ".pyenv/shims/radian"
   				  ,
   				"r.bracketedPaste": true,
   				"r.plot.useHttpgd": true,
@@ -39,6 +39,7 @@
         			"dbaeumer.vscode-eslint",
 //    "customizations": {
 //        "vscode": {
+            // /root/.vscode-remote/extensions/
                 // R Extensions
                 "reditorsupport.r",
                 "rdebugger.r-debugger",
