@@ -24,10 +24,10 @@
   		"vscode": {
   			// Set *default* container specific settings.json values on container create.
   			"settings": {
-  				"r.rterm.linux":
+  				//"r.rterm.linux":
   				  // "/usr/local/bin/radian"
-  				  ".pyenv/shims/radian"
-  				  ,
+  				  //".pyenv/shims/radian"
+  				//  ,
   				"r.bracketedPaste": true,
   				"r.plot.useHttpgd": true,
   				"[r]": {
