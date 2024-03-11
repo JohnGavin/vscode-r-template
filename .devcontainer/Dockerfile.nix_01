@@ -8,4 +8,4 @@ RUN nix-channel --update
 COPY .Rprofile /
 COPY shell.nix /
 RUN nix-build /shell.nix
-# RUN nix-build rPackages.ggplot2 rPackages.pacman rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
+# RUN nix-build -p rPackages.ggplot2 rPackages.pacman rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
