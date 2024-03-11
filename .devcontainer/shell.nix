@@ -11,6 +11,7 @@ pkgs.mkShell {
     # radian
     radianWrapper
     # locales
+    unixtools.whereis # util-linux
 
     #rPackages.ggplot2
     # rPackages.dplyr rPackages.pacman
