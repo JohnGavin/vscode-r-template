@@ -63,3 +63,4 @@ COPY packages.json install_packages.R requirements.txt install_quarto.sh ./setti
 
 # RUN pip3 install -r ./settings/requirements.txt
 
+COPY _etc_os-release /etc/os-release
