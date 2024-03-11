@@ -1,7 +1,7 @@
 # FROM ubuntu:22.04 AS UBUNTU
 # image 'mcr.microsoft.com/devcontainers/base:alpine' locally
 
-FROM nixos/nix AS NIXOS
+FROM nixos/nix
 
 # cat /etc/os-release || cat /usr/lib/os-release
 
