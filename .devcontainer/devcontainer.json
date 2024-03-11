@@ -1,5 +1,7 @@
 {
     "name": "R Dev Environment",
+    // "remoteUser": "vscode",
+    "runArgs": ["--privileged"],
     // "image": "rkrispin/vscode_r_dev:0.1.0",
     "build": {
         "dockerfile":
