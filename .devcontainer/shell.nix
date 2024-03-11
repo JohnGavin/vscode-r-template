@@ -7,7 +7,7 @@ pkgs.mkShell {
     #rnix-lsp
 
     R
-    python3 # radian
+    python3 radian
     radianWrapper
     # locales
 
