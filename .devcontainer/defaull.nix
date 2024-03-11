@@ -1,6 +1,6 @@
-# { pkgs ? import <nixpkgs> { } }:
+{ pkgs ? import <nixpkgs> { } }:
 let
-  pkgs = import <nixpkgs> { };
+  # spkgs = import <nixpkgs> { };
  # pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/f945939fd679284d736112d3d5410eb867f3b31c.tar.gz") {};
  rpkgs = builtins.attrValues {
   inherit (pkgs.rPackages) Cairo devtools dplyr fs ggplot2 glue goodpractice here httpgd lmtest lubridate pacman patchwork purrr quarto readr reticulate rmarkdown roll rvest sandwich stringr tarchetypes targets tibbletime tidyfit tidyr visNetwork;

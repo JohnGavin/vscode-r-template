@@ -17,7 +17,8 @@ FROM nixpkgs/devcontainer
 # RUN nix-build -A python3 FAILS!
 COPY .Rprofile /
 COPY shell.nix /
-RUN nix-build /shell.nix
+RUN nix-build /default.nix
+# RUN nix-build /shell.nix
 # RUN nix-build -p rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
 
 
@@ -63,4 +64,5 @@ COPY packages.json install_packages.R requirements.txt install_quarto.sh ./setti
 
 # RUN pip3 install -r ./settings/requirements.txt
 
+# https://www.freedesktop.org/software/systemd/man/latest/os-release.html
 COPY _etc_os-release /etc/os-release
