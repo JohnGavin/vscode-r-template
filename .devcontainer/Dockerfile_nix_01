@@ -4,7 +4,7 @@
 FROM nixpkgs/devcontainer
 RUN nix-channel --update
 
-USER vscode
+# USER vscode
 WORKDIR /workspaces/vscode-r-template
 COPY default.nix .
 RUN nix-build ./default.nix
