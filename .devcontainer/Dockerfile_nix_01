@@ -4,30 +4,16 @@
 FROM nixpkgs/devcontainer
 RUN nix-channel --update
 
-# RUN nix-build -A pythonFull '<nixpkgs>'
-# RUN nix-build -A python3 FAILS!
-# COPY .Rprofile /
-# COPY default.nix /
-# RUN nix-build /default.nix
-
-
-COPY default.nix .
-RUN nix-build ./default.nix
+# COPY default.nix .
+# RUN nix-build ./default.nix
 # RUN nix-build -p rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
-# RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
 
-
-# USER root
-# RUN addgroup --system vscode
-# RUN adduser --system --ingroup vscode vscode
-# RUN echo "vscode:vscode" | chpasswd
-# RUN chown vscode:vscode -R /home/vscode
-# Switch to app user
-
+# TODO:
+# whereis not found
 # no writeable .libPath() folder!
 # FIXME: cannot save history()?
 # Error in .External2(C_savehistory, file) : no history available to save
-
+# TODO:
 # python error cos no write access?
 #   session.prompt(add_history=add_history)
 
@@ -51,21 +37,13 @@ ENV CONFIGURE_OPTIONS="--with-jpeglib --enable-R-shlib --with-blas --with-lapack
 ENV TZ=UTC
 ENV CRAN_MIRROR=$CRAN_MIRROR
 
-
-
 # https://www.freedesktop.org/software/systemd/man/latest/os-release.html
 COPY _etc_os-release /etc/os-release
 # https://github.com/NixOS/nixpkgs/issues/174633
-# RUN touch /etc/os-release
-# COPY _etc_os-release /etc/os-release
 # cat /etc/os-release || cat /usr/lib/os-release
 
 
-# Set Python Env and install radian
 RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
-# RUN alias r='radian --profile=/.Rprofile'
-
-# RUN locale-gen en_US.UTF-8
 
 # default 'result' is in / (created by root)
 #   CMD ['nix-shell /default.nix']
@@ -73,15 +51,33 @@ RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
 #   see default.nix / runAsRoot = ...
 # work from /workspaces/vscode-r-template/
 WORKDIR /workspaces/vscode-r-template
-COPY .Rprofile .
 USER vscode
-# 'result' is in / (created by root)
-# CMD ['nix-shell ./default.nix']
-# CMD ['nix-shell -p nix-info --run "nix-info -m && r"']
+COPY .Rprofile .
+COPY default.nix .
+RUN nix-build ./default.nix
 
+# 'result' is in / (created by root)
+CMD ['nix-shell ./default.nix']
+# CMD ['nix-shell -f ./default.nix -p nix-info --run "nix-info -m && r"']
+# RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
 # Running programs inside nix
 # bash script in PATH to launch your editor from that Nix environment
 # e.g. project is called housing,
 # ! # / bin/bash
 # nix-shell /absolute/path/to/housing/default.nix --run code
 # execute VS Code in Nix environment for housing project.
+
+# RUN locale-gen en_US.UTF-8
+
+# RUN nix-build -A pythonFull '<nixpkgs>'
+# RUN nix-build -A python3 FAILS!
+# COPY .Rprofile /
+# COPY default.nix /
+# RUN nix-build /default.nix
+
+# USER root
+# RUN addgroup --system vscode
+# RUN adduser --system --ingroup vscode vscode
+# RUN echo "vscode:vscode" | chpasswd
+# RUN chown vscode:vscode -R /home/vscode
+# Switch to app user
