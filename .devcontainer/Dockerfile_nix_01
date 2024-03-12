@@ -1,5 +1,6 @@
 
 # FROM nixos/nix
+# https://github.com/xtruder/nix-devcontainer
 FROM nixpkgs/devcontainer
 # but no nix-build and no nix-shell
 
@@ -9,8 +10,17 @@ FROM nixpkgs/devcontainer
 # RUN nix-build -A python3 FAILS!
 COPY .Rprofile /
 COPY default.nix /
-# COPY shell.nix /
 RUN nix-build /default.nix
+# COPY shell.nix /
+
+# 'result' is in / (created by root)
+# CMD ['nix-shell /default.nix']
+# TODO: switch to USER vscode and to /workspaces/vscode-r-template/ the call
+# COPY default.nix /workspaces/vscode-r-template/
+# python error cos no write access?
+#   session.prompt(add_history=add_history)
+# RUN nix-build /workspaces/vscode-r-template/default.nix
+
 # RUN nix-build /shell.nix
 # RUN nix-build -p rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
 
@@ -37,10 +47,11 @@ ENV CRAN_MIRROR=$CRAN_MIRROR
 
 # RUN locale-gen en_US.UTF-8
 
-WORKDIR ~/
-
-RUN mkdir settings
-COPY packages.json install_packages.R requirements.txt install_quarto.sh ./settings/
+# ~ => /workspaces/vscode-r-template/
+# do NOT use ~ - use absolute paths
+#WORKDIR /workspaces/vscode-r-template/
+#RUN mkdir settings
+#COPY packages.json install_packages.R requirements.txt install_quarto.sh ./settings/
 
 # RUN Rscript ./settings/install_packages.R
 
@@ -64,14 +75,15 @@ COPY _etc_os-release /etc/os-release
 # COPY _etc_os-release /etc/os-release
 # cat /etc/os-release || cat /usr/lib/os-release
 
-RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
+RUN nix-shell -p nix-info --run "nix-info -m" >> /nix-info_m.out
 
 # Step 5 - Set Python Env and install radian
-RUN echo "source /opt/$VENV_NAME/bin/activate" >> ~/.bashrc && echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
+RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
 # RUN pip3 install -r ./settings/requirements.txt
 
 
-# CMD ['nix-shell']
+# 'result' is in / (created by root)
+# CMD ['nix-shell /default.nix']
 
 # Running programs inside nix
 # bash script in PATH to launch your editor from that Nix environment
