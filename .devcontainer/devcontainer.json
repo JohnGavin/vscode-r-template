@@ -29,6 +29,7 @@
   			// Set *default* container specific settings.json values on container create.
   			"settings": {
   			  // R in devcontainer only in nix-shell
+  			  // r.path.linux
   				//"r.rterm.linux":
   				  // "/usr/local/bin/radian"
   				  //".pyenv/shims/radian"

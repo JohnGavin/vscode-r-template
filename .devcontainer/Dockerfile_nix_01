@@ -6,8 +6,8 @@ RUN nix-channel --update
 
 # USER vscode
 WORKDIR /workspaces/vscode-r-template
-COPY default.nix .
-RUN nix-build ./default.nix
+COPY default.nix /workspaces/vscode-r-template/
+RUN nix-build /workspaces/vscode-r-template/default.nix
 # USER root
 
 # TODO:
@@ -31,8 +31,8 @@ ARG CRAN_MIRROR=https://cran.rstudio.com/
 # environment variables
 ENV VENV_NAME=$VENV_NAME
 ENV R_VERSION_MAJOR=$R_VERSION_MAJOR
-ENV R_VERSION_MINOR=$R_VERSION_MINOR
-ENV R_VERSION_PATCH=$R_VERSION_PATCH
+# ENV R_VERSION_MINOR=$R_VERSION_MINOR
+# ENV R_VERSION_PATCH=$R_VERSION_PATCH
 # ENV QUARTO_VER=$QUARTO_VER
 ENV CONFIGURE_OPTIONS="--with-jpeglib --enable-R-shlib --with-blas --with-lapack"
 # --with-cairo
@@ -53,14 +53,14 @@ RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
 # work from /workspaces/vscode-r-template/
 # USER vscode
 WORKDIR /workspaces/vscode-r-template
-COPY .Rprofile .
-# COPY default.nix .
+COPY .Rprofile /workspaces/vscode-r-template/
+# COPY default.nix /workspaces/vscode-r-template/
 #USER root
-#RUN nix-build ./default.nix
+# RUN nix-build ./default.nix
 #USER vscode
 
 # 'result' is in / (created by root)
-CMD ['nix-shell ./default.nix']
+# CMD ['nix-shell ./default.nix']
 # CMD ['nix-shell -f ./default.nix -p nix-info --run "nix-info -m && r"']
 # RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
 # Running programs inside nix
