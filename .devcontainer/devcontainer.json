@@ -10,13 +10,13 @@
           //"Dockerfile.dev"
           ,
         "context": "."
-        //, "args": {
-        //    "VENV_NAME": "R_ENV",
-        //    "R_VERSION_MAJOR": "4",
-        //    "R_VERSION_MINOR": "3",
-        //    "R_VERSION_PATCH": "1",
-        //    "CRAN_MIRROR": "https://cran.rstudio.com/",
-        //    "QUARTO_VER": "1.3.450"
+        , "args": {
+            "VENV_NAME": "R_ENV"
+        //    , "R_VERSION_MAJOR": "4"
+        //    , "R_VERSION_MINOR": "3"
+        //    , "R_VERSION_PATCH": "2"
+        //    , "CRAN_MIRROR": "https://cran.rstudio.com/"
+        //    , "QUARTO_VER": "1.4.590"
         //}
     },
     "customizations": {
@@ -58,6 +58,8 @@
         }
     },
     	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "bash"
+  // start as root? from '/'?
+	"postCreateCommand": "nix-shell /default.nix"
+	//"bash"
 	//"R --vanilla",
 }

@@ -1,17 +1,9 @@
-# FROM ubuntu:22.04
-# image 'mcr.microsoft.com/devcontainers/base:alpine' locally
 
 # FROM nixos/nix
 FROM nixpkgs/devcontainer
+# but no nix-build and no nix-shell
 
 # RUN nix-channel --update
-
-# to get past this error
-# message: 'Command in container failed: (cat /etc/os-release || cat /usr/lib/os-release) 2>/dev/null'
-# https://github.com/NixOS/nixpkgs/issues/174633
-# RUN touch /etc/os-release
-# COPY _etc_os-release /etc/os-release
-# cat /etc/os-release || cat /usr/lib/os-release
 
 # RUN nix-build -A pythonFull '<nixpkgs>'
 # RUN nix-build -A python3 FAILS!
@@ -67,3 +59,19 @@ COPY packages.json install_packages.R requirements.txt install_quarto.sh ./setti
 
 # https://www.freedesktop.org/software/systemd/man/latest/os-release.html
 COPY _etc_os-release /etc/os-release
+# https://github.com/NixOS/nixpkgs/issues/174633
+# RUN touch /etc/os-release
+# COPY _etc_os-release /etc/os-release
+# cat /etc/os-release || cat /usr/lib/os-release
+
+RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
+
+# CMD ['nix-shell']
+
+# Running programs inside nix
+# bash script in PATH to launch your editor from that Nix environment
+#e.g. project is called housing,
+#!#/bin/bash
+# nix-shell /absolute/path/to/housing/default.nix --run code
+# execute VS Code in Nix environment for housing project.
+

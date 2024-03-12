@@ -39,11 +39,17 @@ pypkgs = [ # pkgs.python311
     };
   }) ];
   system_packages = builtins.attrValues {
-  inherit (pkgs) R glibcLocales nix cairo lazygit nano oh-my-zsh openssl quarto radianWrapper
-  # unixtools.whereis #
-  util-linux
-  # python3-pandas
-  # rstudioWrapper
+  inherit (pkgs)
+    R quarto radianWrapper
+    python3
+    glibcLocales
+    # nix # why nix?
+    cairo lazygit
+    nano oh-my-zsh openssl
+    # unixtools.whereis #
+    util-linux
+    # python3-pandas
+    # rstudioWrapper
   ;
  };
   in
