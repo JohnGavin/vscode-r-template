@@ -17,7 +17,7 @@
         //    , "R_VERSION_PATCH": "2"
         //    , "CRAN_MIRROR": "https://cran.rstudio.com/"
         //    , "QUARTO_VER": "1.4.590"
-        //}
+        }
     },
     "customizations": {
   		// Configure properties specific to VS Code.
