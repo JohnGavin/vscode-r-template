@@ -77,9 +77,9 @@ pypkgs = [ # pkgs.python311
     ${pkgs.dockerTools.shadowSetup}
     groupadd -r vscode
     useradd -r -g vscode vscode
+    echo "vscode:vscode" | chpasswd
     mkdir /home/vscode
     chown vscode:vscode -R /home/vscode
-    echo "vscode:vscode" | chpasswd
   '';
 
   }
