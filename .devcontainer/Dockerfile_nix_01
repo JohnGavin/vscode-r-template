@@ -4,8 +4,9 @@
 FROM nixpkgs/devcontainer
 RUN nix-channel --update
 
-# COPY default.nix .
-# RUN nix-build ./default.nix
+WORKDIR /workspaces/vscode-r-template
+COPY default.nix .
+RUN nix-build ./default.nix
 # RUN nix-build -p rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
 
 # TODO:
@@ -53,7 +54,7 @@ RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
 WORKDIR /workspaces/vscode-r-template
 USER vscode
 COPY .Rprofile .
-COPY default.nix .
+# COPY default.nix .
 #USER root
 #RUN nix-build ./default.nix
 #USER vscode
@@ -76,8 +77,9 @@ CMD ['nix-shell ./default.nix']
 # COPY .Rprofile /
 # COPY default.nix /
 # RUN nix-build /default.nix
-COPY default.nix /workspaces/vscode-r-template/
-RUN nix-build /workspaces/vscode-r-template/default.nix
+WORKDIR /workspaces/vscode-r-template
+COPY default.nix .
+# RUN nix-build ./default.nix
 
 
 # USER root
