@@ -66,7 +66,7 @@
 
     	// Use 'postCreateCommand' to run commands after the container is created.
   // start as root? from '/'?
-	"postCreateCommand": "nix-shell /default.nix"
+	"postCreateCommand": "nix-shell ./default.nix"
 	//"bash"
 	//"R --vanilla",
 }
