@@ -60,7 +60,7 @@ COPY .Rprofile .
 #USER vscode
 
 # 'result' is in / (created by root)
-# CMD ['nix-shell ./default.nix']
+CMD ['nix-shell ./default.nix']
 # CMD ['nix-shell -f ./default.nix -p nix-info --run "nix-info -m && r"']
 # RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
 # Running programs inside nix

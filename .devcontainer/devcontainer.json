@@ -28,45 +28,46 @@
   		"vscode": {
   			// Set *default* container specific settings.json values on container create.
   			"settings": {
+  			  // R in devcontainer only in nix-shell
   				//"r.rterm.linux":
   				  // "/usr/local/bin/radian"
   				  //".pyenv/shims/radian"
-  				//  ,
   				"r.bracketedPaste": true,
   				"r.plot.useHttpgd": true,
   				"[r]": {
-  					"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+  				"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
   				}
   			},
   			// Add the IDs of extensions you want installed when the container is created.
   			"extensions": [
-        			"dbaeumer.vscode-eslint",
+          "dbaeumer.vscode-eslint",
 //    "customizations": {
 //        "vscode": {
             // /root/.vscode-remote/extensions/
-                // R Extensions
-                "reditorsupport.r",
-                "rdebugger.r-debugger",
-                // Documentation Extensions
-                "quarto.quarto",
-                "purocean.drawio-preview",
-                "redhat.vscode-yaml",
-                "yzhang.markdown-all-in-one",
-                // Docker Supporting Extensions
-                "ms-azuretools.vscode-docker",
-                "ms-vscode-remote.remote-containers",
-                // Python Extensions
-                "ms-python.python",
-                "ms-toolsai.jupyter"
-            ]
-        }
+          // R Extensions
+          "reditorsupport.r",
+          "rdebugger.r-debugger",
+          // Documentation Extensions
+          "quarto.quarto",
+          "purocean.drawio-preview",
+          "redhat.vscode-yaml",
+          "yzhang.markdown-all-in-one",
+          // Docker Supporting Extensions
+          "ms-azuretools.vscode-docker",
+          "ms-vscode-remote.remote-containers",
+          // Python Extensions
+          "ms-python.python",
+          "ms-toolsai.jupyter"
+        ]
+      }
     },
     // 'forwardPorts' ports list inside  container available locally
     // "forwardPorts": [],
 
     	// Use 'postCreateCommand' to run commands after the container is created.
   // start as root? from '/'?
-	"postCreateCommand": "nix-shell ./default.nix"
+  //error: getting status of '/workspaces/vscode-r-template/default.nix': No such file or directory
+	//"postCreateCommand": "nix-shell ./default.nix"
 	//"bash"
 	//"R --vanilla",
 }
