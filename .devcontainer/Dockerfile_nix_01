@@ -7,7 +7,7 @@ RUN nix-channel --update
 # USER vscode
 WORKDIR /workspaces/vscode-r-template
 COPY default.nix /workspaces/vscode-r-template/
-RUN nix-build /workspaces/vscode-r-template/default.nix
+RUN nix-build /workspaces/vscode-r-template/default.nix -o /workspaces/vscode-r-template/result1
 # USER root
 
 # TODO:
@@ -47,7 +47,7 @@ COPY _etc_os-release /etc/os-release
 RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
 
 # default 'result' is in / (created by root)
-#   CMD ['nix-shell /default.nix']
+#   CMD ['nix-shell -f /workspaces/vscode-r-template/default.nix -o /workspaces/vscode-r-template/result2']
 # switch to USER vscode /home/vscode
 #   see default.nix / runAsRoot = ...
 # work from /workspaces/vscode-r-template/
@@ -59,8 +59,9 @@ COPY .Rprofile /workspaces/vscode-r-template/
 # RUN nix-build ./default.nix
 #USER vscode
 
+# see postCreateCommand in devcontainer.json
 # 'result' is in / (created by root)
-# CMD ['nix-shell ./default.nix']
+# CMD ['nix-shell -f /workspaces/vscode-r-template/default.nix -o /workspaces/vscode-r-template/result2']
 # CMD ['nix-shell -f ./default.nix -p nix-info --run "nix-info -m && r"']
 # RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
 # Running programs inside nix

@@ -68,7 +68,7 @@
     	// Use 'postCreateCommand' to run commands after the container is created.
   // start as root? from '/'?
   //error: getting status of '/workspaces/vscode-r-template/default.nix': No such file or directory
-	//"postCreateCommand": "nix-shell ./default.nix"
+	//"postCreateCommand": "nix-shell -f /workspaces/vscode-r-template/default.nix -o /workspaces/vscode-r-template/result2"
 	//"bash"
 	//"R --vanilla",
 }
