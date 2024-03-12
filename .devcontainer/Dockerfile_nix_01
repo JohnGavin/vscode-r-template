@@ -8,7 +8,7 @@ RUN nix-channel --update
 WORKDIR /workspaces/vscode-r-template
 COPY default.nix .
 RUN nix-build ./default.nix
-USER root
+# USER root
 
 # TODO:
 # whereis not found
@@ -51,7 +51,7 @@ RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
 # switch to USER vscode /home/vscode
 #   see default.nix / runAsRoot = ...
 # work from /workspaces/vscode-r-template/
-USER vscode
+# USER vscode
 WORKDIR /workspaces/vscode-r-template
 COPY .Rprofile .
 # COPY default.nix .
