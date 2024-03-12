@@ -9,27 +9,29 @@ RUN nix-channel --update
 COPY .Rprofile /
 COPY default.nix /
 RUN nix-build /default.nix
-# COPY shell.nix /
 
 # 'result' is in / (created by root)
 # CMD ['nix-shell /default.nix']
 # TODO: switch to USER vscode /home/vscode
 #   work from /workspaces/vscode-r-template/
 # Create non-root USER vscode /home/vscode
-#RUN addgroup --system vscode
-#RUN adduser --system --ingroup vscode vscode
-#RUN echo "vscode:vscode" |  chpasswd
-#RUN chown vscode:vscode -R /home/vscode
-#COPY index.R           .
+RUN addgroup --system vscode
+RUN adduser --system --ingroup vscode vscode
+RUN echo "vscode:vscode" |  chpasswd
+RUN chown vscode:vscode -R /home/vscode
 # Switch to app user
-# USER vscode
-# WORKDIR /workspaces/vscode-r-template
-# alias r='radian --profile=/.Rprofile'
-# COPY .Rprofile .
-# COPY default.nix .
-# RUN nix-build ./default.nix
+USER vscode
+WORKDIR /workspaces/vscode-r-template
+RUN alias r='radian --profile=/.Rprofile'
+COPY .Rprofile .
+COPY default.nix .
+RUN nix-build ./default.nix
 # RUN nix-build -p rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
 # RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
+
+# no writeable .libPath() folder!
+# FIXME: cannot save history()?
+# Error in .External2(C_savehistory, file) : no history available to save
 
 # python error cos no write access?
 #   session.prompt(add_history=add_history)
