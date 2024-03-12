@@ -1,5 +1,6 @@
 {
     "name": "R Dev Environment",
+    // TODO set remoteUser
     // "remoteUser": "vscode",
     // "runArgs": ["--privileged"],
     // "runArgs": ["--gpus", "all"]
