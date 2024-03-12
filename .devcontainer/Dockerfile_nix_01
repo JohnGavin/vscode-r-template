@@ -67,11 +67,8 @@ COPY _etc_os-release /etc/os-release
 RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
 
 # Step 5 - Set Python Env and install radian
-RUN python3 -m venv /opt/$VENV_NAME  \
-    && export PATH=/opt/$VENV_NAME/bin:$PATH \
-    && echo "source /opt/$VENV_NAME/bin/activate" >> ~/.bashrc \
-    && echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
-RUN pip3 install -r ./settings/requirements.txt
+RUN echo "source /opt/$VENV_NAME/bin/activate" >> ~/.bashrc && echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
+# RUN pip3 install -r ./settings/requirements.txt
 
 
 # CMD ['nix-shell']
