@@ -7,7 +7,8 @@ RUN nix-channel --update
 WORKDIR /workspaces/vscode-r-template
 COPY default.nix .
 RUN nix-build ./default.nix
-# RUN nix-build -p rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
+USER vscode
+USER root
 
 # TODO:
 # whereis not found
@@ -43,7 +44,6 @@ COPY _etc_os-release /etc/os-release
 # https://github.com/NixOS/nixpkgs/issues/174633
 # cat /etc/os-release || cat /usr/lib/os-release
 
-
 RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
 
 # default 'result' is in / (created by root)
@@ -52,7 +52,7 @@ RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
 #   see default.nix / runAsRoot = ...
 # work from /workspaces/vscode-r-template/
 WORKDIR /workspaces/vscode-r-template
-USER vscode
+# USER vscode
 COPY .Rprofile .
 # COPY default.nix .
 #USER root
@@ -60,7 +60,7 @@ COPY .Rprofile .
 #USER vscode
 
 # 'result' is in / (created by root)
-CMD ['nix-shell ./default.nix']
+# CMD ['nix-shell ./default.nix']
 # CMD ['nix-shell -f ./default.nix -p nix-info --run "nix-info -m && r"']
 # RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
 # Running programs inside nix
@@ -77,8 +77,8 @@ CMD ['nix-shell ./default.nix']
 # COPY .Rprofile /
 # COPY default.nix /
 # RUN nix-build /default.nix
-WORKDIR /workspaces/vscode-r-template
-COPY default.nix .
+# WORKDIR /workspaces/vscode-r-template
+# COPY default.nix .
 # RUN nix-build ./default.nix
 
 
