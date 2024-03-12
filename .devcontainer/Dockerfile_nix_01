@@ -54,9 +54,9 @@ WORKDIR /workspaces/vscode-r-template
 USER vscode
 COPY .Rprofile .
 COPY default.nix .
-USER root
-RUN nix-build ./default.nix
-USER vscode
+#USER root
+#RUN nix-build ./default.nix
+#USER vscode
 
 # 'result' is in / (created by root)
 CMD ['nix-shell ./default.nix']
@@ -76,6 +76,9 @@ CMD ['nix-shell ./default.nix']
 # COPY .Rprofile /
 # COPY default.nix /
 # RUN nix-build /default.nix
+COPY default.nix /workspaces/vscode-r-template/
+RUN nix-build /workspaces/vscode-r-template/default.nix
+
 
 # USER root
 # RUN addgroup --system vscode
