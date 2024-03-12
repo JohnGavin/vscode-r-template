@@ -44,7 +44,7 @@ pypkgs = [ # pkgs.python311
     python3
     glibcLocales
     # nix # why nix?
-     lazygit # cairo httpgd is fully functional without cairo Configuration failed to find cairo system library.
+     lazygit # httpgd is fully functional without cairo Configuration failed to find cairo system library.
     nano oh-my-zsh openssl
     # unixtools.whereis #
     util-linux
@@ -65,5 +65,20 @@ pypkgs = [ # pkgs.python311
     buildInputs = [ git_archive_pkgs rpkgs
     system_packages pypkgs
     ];
+
+# default 'result' is in / (created by root)
+# CMD ['nix-shell /default.nix']
+# switch to USER vscode /home/vscode
+#   work from /workspaces/vscode-r-template/
+# Create non-root USER vscode /home/vscode
+  runAsRoot = ''
+    #!${pkgs.runtimeShell}
+    ${pkgs.dockerTools.shadowSetup}
+    groupadd -r vscode
+    useradd -r -g vscode vscode
+    echo "vscode:vscode" | chpasswd
+    mkdir /home/vscode
+    chown vscode:vscode -R /home/vscode
+  '';
 
   }

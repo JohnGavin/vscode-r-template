@@ -6,28 +6,23 @@ RUN nix-channel --update
 
 # RUN nix-build -A pythonFull '<nixpkgs>'
 # RUN nix-build -A python3 FAILS!
-COPY .Rprofile /
-COPY default.nix /
-RUN nix-build /default.nix
+# COPY .Rprofile /
+# COPY default.nix /
+# RUN nix-build /default.nix
 
-# 'result' is in / (created by root)
-# CMD ['nix-shell /default.nix']
-# TODO: switch to USER vscode /home/vscode
-#   work from /workspaces/vscode-r-template/
-# Create non-root USER vscode /home/vscode
-RUN addgroup --system vscode
-RUN adduser --system --ingroup vscode vscode
-RUN echo "vscode:vscode" |  chpasswd
-RUN chown vscode:vscode -R /home/vscode
-# Switch to app user
-USER vscode
-WORKDIR /workspaces/vscode-r-template
-RUN alias r='radian --profile=/.Rprofile'
-COPY .Rprofile .
+
 COPY default.nix .
 RUN nix-build ./default.nix
 # RUN nix-build -p rPackages.jsonlite rPackages.languageserver rPackages.httpgd rPackages.rmarkdown rPackages.dplyr rPackages.shiny rPackages.plotly rPackages.usethis
 # RUN nix-shell -p nix-info --run "nix-info -m" >> ./nix-info_m.out
+
+
+# USER root
+# RUN addgroup --system vscode
+# RUN adduser --system --ingroup vscode vscode
+# RUN echo "vscode:vscode" | chpasswd
+# RUN chown vscode:vscode -R /home/vscode
+# Switch to app user
 
 # no writeable .libPath() folder!
 # FIXME: cannot save history()?
@@ -43,28 +38,20 @@ ARG R_VERSION_MINOR=3
 ARG R_VERSION_PATCH=2
 ARG DEBIAN_FRONTEND=noninteractive
 ARG CRAN_MIRROR=https://cran.rstudio.com/
-ARG QUARTO_VER="1.4.590"
+# ARG QUARTO_VER="1.4.590"
 
 # environment variables
 ENV VENV_NAME=$VENV_NAME
 ENV R_VERSION_MAJOR=$R_VERSION_MAJOR
 ENV R_VERSION_MINOR=$R_VERSION_MINOR
 ENV R_VERSION_PATCH=$R_VERSION_PATCH
-ENV QUARTO_VER=$QUARTO_VER
-ENV CONFIGURE_OPTIONS="--with-cairo --with-jpeglib --enable-R-shlib --with-blas --with-lapack"
+# ENV QUARTO_VER=$QUARTO_VER
+ENV CONFIGURE_OPTIONS="--with-jpeglib --enable-R-shlib --with-blas --with-lapack"
+# --with-cairo
 ENV TZ=UTC
 ENV CRAN_MIRROR=$CRAN_MIRROR
 
-# RUN locale-gen en_US.UTF-8
 
-
-# Python Environment and install radian
-# RUN python3 -m venv /opt/$VENV_NAME  \
-#     && export PATH=/opt/$VENV_NAME/bin:$PATH \
-#     && echo "source /opt/$VENV_NAME/bin/activate" >> ~/.bashrc \
-#     && echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
-
-# RUN pip3 install -r ./settings/requirements.txt
 
 # https://www.freedesktop.org/software/systemd/man/latest/os-release.html
 COPY _etc_os-release /etc/os-release
@@ -76,11 +63,20 @@ COPY _etc_os-release /etc/os-release
 
 # Set Python Env and install radian
 RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
-# RUN pip3 install -r ./settings/requirements.txt
+# RUN alias r='radian --profile=/.Rprofile'
 
+# RUN locale-gen en_US.UTF-8
 
+# default 'result' is in / (created by root)
+#   CMD ['nix-shell /default.nix']
+# switch to USER vscode /home/vscode
+#   see default.nix / runAsRoot = ...
+# work from /workspaces/vscode-r-template/
+WORKDIR /workspaces/vscode-r-template
+COPY .Rprofile .
+USER vscode
 # 'result' is in / (created by root)
-# CMD ['nix-shell /default.nix']
+# CMD ['nix-shell ./default.nix']
 # CMD ['nix-shell -p nix-info --run "nix-info -m && r"']
 
 # Running programs inside nix
