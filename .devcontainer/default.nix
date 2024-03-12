@@ -46,7 +46,7 @@ pypkgs = [ # pkgs.python311
     # nix # why nix?
      lazygit # httpgd is fully functional without cairo Configuration failed to find cairo system library.
     nano oh-my-zsh openssl
-    util-linux # TODO: whereis find missing?
+    coreutils # util-linux # whereis only inside nix-shell
     cairo
     # python3-pandas
     # rstudioWrapper
