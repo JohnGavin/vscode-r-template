@@ -4,10 +4,10 @@
 FROM nixpkgs/devcontainer
 RUN nix-channel --update
 
+USER vscode
 WORKDIR /workspaces/vscode-r-template
 COPY default.nix .
 RUN nix-build ./default.nix
-USER vscode
 USER root
 
 # TODO:
@@ -51,8 +51,8 @@ RUN echo "alias r='radian --profile=/.Rprofile'" >> ~/.bashrc
 # switch to USER vscode /home/vscode
 #   see default.nix / runAsRoot = ...
 # work from /workspaces/vscode-r-template/
+USER vscode
 WORKDIR /workspaces/vscode-r-template
-# USER vscode
 COPY .Rprofile .
 # COPY default.nix .
 #USER root
