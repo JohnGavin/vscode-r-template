@@ -71,14 +71,15 @@ pypkgs = [ # pkgs.python311
 # switch to USER vscode /home/vscode
 #   work from /workspaces/vscode-r-template/
 # Create non-root USER vscode /home/vscode
+# https://discourse.nixos.org/t/how-to-add-a-non-root-user-when-building-a-docker-image-with-nix/22883/6
   runAsRoot = ''
     #!${pkgs.runtimeShell}
     ${pkgs.dockerTools.shadowSetup}
     groupadd -r vscode
     useradd -r -g vscode vscode
-    echo "vscode:vscode" | chpasswd
     mkdir /home/vscode
     chown vscode:vscode -R /home/vscode
+    echo "vscode:vscode" | chpasswd
   '';
 
   }
