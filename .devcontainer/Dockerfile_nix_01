@@ -1,3 +1,10 @@
+# devcontainer.json has same functionality as  docker-compose up -d
+# docker run -d -p 8787:8787 \
+#  -v YOUR_LOCAL_PATH:/home/rstudio/FOLDER_NAME \
+#  -v $RSTUDIO_CONFIG_PATH:/home/rstudio/.config/rstudio \
+ # rkrispin/flex_dash_env:dev.0.0.0.9000
+# https://github.com/RamiKrispin/deploy-flex-actions?tab=readme-ov-file#lunching-the-development-environment
+#
 
 # FROM nixos/nix
 # https://github.com/xtruder/nix-devcontainer
@@ -8,6 +15,7 @@ RUN nix-channel --update
 WORKDIR /workspaces/vscode-r-template
 COPY default.nix /workspaces/vscode-r-template/
 RUN nix-build /workspaces/vscode-r-template/default.nix -o /workspaces/vscode-r-template/result1
+# RUN quarto add quarto-ext/shinylive
 # USER root
 
 # TODO:
@@ -19,7 +27,9 @@ RUN nix-build /workspaces/vscode-r-template/default.nix -o /workspaces/vscode-r-
 # python error cos no write access?
 #   session.prompt(add_history=add_history)
 
-# arguments
+# ARG assign vars dynamically at _build_ time
+# ENV available at both _build and run_ time
+# set dynamic env vars first as arguments and then to env vars - nice if args exist after build time for debugging(?)
 ARG VENV_NAME=VENV_NAME
 ARG R_VERSION_MAJOR=4
 ARG R_VERSION_MINOR=3
